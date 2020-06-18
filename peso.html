@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilo.css">
+
+    <title>Peso</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark" id="nav1">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" id="button-menu" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="perfil.html">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="alimento.html">Alimento</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="peso.html">Peso</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="coração.html">Coração</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Sair</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <header>
+        <p class=" text-white text-center">Peso</p>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class=" col-md-12 text-center">
+                    <img class="img-responsive" src="logo/logo-peso.svg" width="200" height="200" alt="Imagem" id="logo-coração"/>
+                </div>              
+            </div>
+        
+            <p class="text-white text-center">73 Kg</p>
+            <p class="text-white text-center">IMC= 26,8</p>
+            <p class="text-white text-center">Excesso de peso</p>
+        
+        
+            <!-- Start Canvas -> Desenhar elementos gráficos usando JS-->
+            <canvas class="line-chart"></canvas>
+        
+            <!-- Include Chart JS-->
+            <canvas id="Peso" width="400" height="100"></canvas>
+            <script>
+            var ctx = document.getElementById('Peso').getContext('2d');
+            var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: [{
+                    label: 'Kg',
+                    BackgroundColor: 'rgb(0, 128, 242)',
+                    pointBackgroundColor: 'rgb(0, 128, 242)',
+                    pointBorderColor: 'rgb(0, 128, 242)',
+                    borderColor: 'rgb(0, 128, 242)',
+                    data: [73, 70, 75, 72, 70, 74, 71, 70, 69, 70, 72, 73,]
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+                "hover": {
+                "animationDuration": 0
+            },
+                "animation": {
+                "duration": 1000,
+                "onComplete": function() 
+            {
+            var chartInstance = this.chart,
+                ctx = chartInstance.ctx;
+
+                ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';                
+
+
+                this.data.datasets.forEach(function(dataset, i) {
+                    var meta = chartInstance.controller.getDatasetMeta(i);
+                    meta.data.forEach(function(bar, index) {
+                        var data = dataset.data[index];
+                        ctx.fillText(data, bar._model.x, bar._model.y - 1);
+                    });
+                });
+            }
+            },
+
+            responsive: true,
+            title:{
+            display:true,
+            text:'Mensal'
+            },
+            legend: {
+            "display": false,
+            position: 'bottom',
+            },
+            tooltips: {
+            "enabled": true
+            },
+            scales: {
+            xAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: false,
+                    labelString: 'Month'
+                }
+            }],
+            yAxes: [{
+                display: true,
+                scaleLabel: {
+                    display: false,
+                    labelString: 'Value'
+                }
+            }]
+            }
+            }
+            });
+            </script>
+        </div>
+        
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
